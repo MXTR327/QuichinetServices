@@ -1,0 +1,13 @@
+build:
+  env: python3.8
+
+start:
+  name: Django Server
+  script: python manage.py runserver 0.0.0.0:$PORT
+
+services:
+  - name: web
+    build: .
+    env:
+      - SECRET_KEY=your_secret_key
+      - DEBUG=1
