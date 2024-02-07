@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-1r&ev+^#5d1pqrr(8l)iamo1954dk8p0yj_d=9t#nr$4+rgg@q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -45,7 +45,7 @@ ROOT_URLCONF = 'Quichinet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'gestionClientes/Templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'gestionClientes/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,7 +67,7 @@ WSGI_APPLICATION = 'Quichinet.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': [os.path.join(BASE_DIR, 'db.sqlite3')],
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
