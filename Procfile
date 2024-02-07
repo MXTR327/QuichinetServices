@@ -1,0 +1,1 @@
+web: gunicorn Quichinet.wsgi --log-file -
