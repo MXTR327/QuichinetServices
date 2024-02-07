@@ -46,7 +46,7 @@ ROOT_URLCONF = 'Quichinet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'gestionClientes/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'gestionClientes/Templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
