@@ -6,6 +6,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -27,7 +28,7 @@ CSRF_TRUSTED_ORIGINS = ['https://quichinetservices-production.up.railway.app']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth',  
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -120,6 +121,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'gestionClientes/static/')
 ]
+
+print(BASE_DIR, "XD1")
+print(STATIC_ROOT, "XD2")
+print(STATICFILES_DIRS, "XD3")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
