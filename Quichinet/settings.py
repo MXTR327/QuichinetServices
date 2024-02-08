@@ -17,8 +17,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = ['web-production-da13.up.railway.app']
-
 
 
 # Application definition
