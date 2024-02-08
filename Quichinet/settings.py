@@ -15,9 +15,13 @@ SECRET_KEY = 'django-insecure-1r&ev+^#5d1pqrr(8l)iamo1954dk8p0yj_d=9t#nr$4+rgg@q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#IMPORTANTES ---
+
 ALLOWED_HOSTS = ['quichinetservices-production.up.railway.app']
 
 CSRF_TRUSTED_ORIGINS = ['https://quichinetservices-production.up.railway.app']
+
+####################
 
 # Application definition
 
@@ -114,7 +118,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'Quichinet/static')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 # Default primary key field type
