@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-1r&ev+^#5d1pqrr(8l)iamo1954dk8p0yj_d=9t#nr$4+rgg@q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 #IMPORTANTES ---
 
@@ -123,11 +123,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / "Quichinet/static/",
 ]
-
-print(BASE_DIR, "BaseDir")
-print(STATIC_ROOT, "StaticRoot")
-print(STATICFILES_DIRS, "StaticFilesDir")
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
