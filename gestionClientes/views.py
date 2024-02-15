@@ -87,7 +87,7 @@ def formPagoCliente(request, codigo):
 def agregarPago(request):
     codigo_cliente = request.POST["codigo"]
     fecha_esperada = request.POST["fecha_esperada"]
-    monto_pago = request.POST["monto_pago"]
+    monto_pagar = request.POST["monto_pago"]
 
     try:
         cliente = Cliente.objects.get(id_cliente=codigo_cliente)
@@ -95,7 +95,7 @@ def agregarPago(request):
         raise Http404("El cliente no existe")
 
     pago = Pago.objects.create(
-        id_cliente=cliente, fecha_pago_esperada=fecha_esperada, monto_pago=monto_pago
+        id_cliente=cliente, fecha_pago_esperada=fecha_esperada, monto_pago=monto_pagar
     )
     return redirect("/informacionPago/" + codigo_cliente)
 

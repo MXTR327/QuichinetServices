@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('fecha_pago_esperada', models.DateField()),
                 ('fecha_pago_real', models.DateField(null=True)),
                 ('monto_pago', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('metodo_pago', models.CharField(max_length=50)),
+                ('metodo_pago', models.CharField(null=True, max_length=50)),
                 ('id_cliente', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='gestionClientes.cliente')),
             ],
         ),
