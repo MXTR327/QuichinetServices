@@ -23,4 +23,6 @@ urlpatterns = [
     path("salir/", views.salir, name="salir"),
     path("index/", views.index, name="index"),
     path("accounts/", include("django.contrib.auth.urls")),
+    
+    path('generar-reporte/', views.generar_reporte, name='generar-reporte'),
 ]

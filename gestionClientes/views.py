@@ -8,8 +8,63 @@ from django.db.models import Q
 from django.http import Http404
 from dateutil.relativedelta import relativedelta
 
-# Create your views here.
+from django.shortcuts import render
+from django.http import HttpResponse
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle
+from django.utils import timezone
 
+def generar_reporte(request):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="reporte_quichinet_services.pdf"'
+    
+    clientes = Cliente.objects.all()
+    mes_actual = timezone.now().month
+    año_actual = timezone.now().year
+    total_recibido = sum(pago.monto_pago for cliente in clientes for pago in cliente.pago_set.filter(fecha_pago_real__month=mes_actual, fecha_pago_real__year=año_actual))
+
+    pdf = SimpleDocTemplate(response, pagesize=letter)
+    elementos = []
+
+    titulo = "Reporte de Pagos Empresa 'Quichinet Services'"
+    estilo_titulo = ParagraphStyle(name='TitleStyle', fontSize=20, alignment=1, spaceAfter=20)
+    elementos.append(Paragraph(titulo, estilo_titulo))
+    elementos.append(Spacer(1, 12))
+
+    fecha_actual = timezone.now().strftime("%d/%m/%Y")
+    estilo_fecha = ParagraphStyle(name='DateStyle', fontSize=12, alignment=2)
+    elementos.append(Paragraph(fecha_actual, estilo_fecha))
+    elementos.append(Spacer(1, 12))
+
+    tabla_datos = [["Nombre del Cliente", "Fecha de Pago Real", "Monto de Pago"]]
+    for cliente in clientes:
+        for pago in cliente.pago_set.filter(fecha_pago_real__month=mes_actual, fecha_pago_real__year=año_actual):
+            fila = [cliente.nombre_cliente + " " + cliente.apellido_cliente, pago.fecha_pago_real, pago.monto_pago]
+            tabla_datos.append(fila)
+
+    tabla = Table(tabla_datos, colWidths=[180, 180, 180])
+    estilo_tabla = TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                               ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                               ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                               ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                               ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                               ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                               ('GRID', (0, 0), (-1, -1), 1, colors.black)])
+
+    tabla.setStyle(estilo_tabla)
+    elementos.append(tabla)
+
+    # Estilo para el total recibido
+    estilo_total_recibido = ParagraphStyle(name='TotalRecibidoStyle', fontSize=16, textColor=colors.black, alignment=2)
+    total_recibido_parrafo = Paragraph(f"Total Recibido: {total_recibido}", estilo_total_recibido)
+    elementos.append(total_recibido_parrafo)
+
+    pdf.build(elementos)
+    return response
+
+##################################################################################
 
 @login_required
 def eliminarPago(request, codigo):
