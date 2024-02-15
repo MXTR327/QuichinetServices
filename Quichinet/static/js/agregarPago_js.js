@@ -11,19 +11,5 @@ function validarDecimal(input) {
 }
 
 $(document).ready(function () {
-    function calcularFechaSiguienteMes() {
-        const fechaActual = new Date();
-        const diaActual = fechaActual.getDate();
-        let mesSiguiente = fechaActual.getMonth() + 1;
-        let anioSiguiente = fechaActual.getFullYear();
-
-        if (mesSiguiente === 12) {
-            mesSiguiente = 0;
-            anioSiguiente++;
-        }
-        const fechaSiguienteMes = new Date(anioSiguiente, mesSiguiente, diaActual);
-        const fechaFormateada = fechaSiguienteMes.toISOString().split('T')[0];
-        $('#fecha_esperada').val(fechaFormateada);
-    }
-    calcularFechaSiguienteMes();
+    $("#fecha_esperada").val(new Date().toISOString().substr(0, 10));
 });

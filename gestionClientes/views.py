@@ -80,7 +80,16 @@ def formPagoCliente(request, codigo):
         cliente = Cliente.objects.get(id_cliente=codigo)
     except Cliente.DoesNotExist:
         raise Http404("El cliente no existe")
-    return render(request, "forms/agregarPago.html", {"cliente": cliente})
+
+    # Obtener el pago existente si está presente en la base de datos
+    pago_existente = None
+    if cliente.pago_set.exists():
+        pago_existente = cliente.pago_set.first()
+
+    # Determinar si es agregar o editar
+    modo = "agregar" if not pago_existente else "editar"
+
+    return render(request, "forms/agregarPago.html", {"cliente": cliente, "modo": modo, "pago_existente": pago_existente})
 
 
 @login_required
@@ -98,6 +107,43 @@ def agregarPago(request):
         id_cliente=cliente, fecha_pago_esperada=fecha_esperada, monto_pago=monto_pagar
     )
     return redirect("/informacionPago/" + codigo_cliente)
+
+@login_required
+def edicionPago(request, codigo):
+    try:
+        pago = Pago.objects.get(id_pago=codigo)
+    except Cliente.DoesNotExist:
+        raise Http404("El pago no existe")
+    return render(request, "forms/edicionPago.html", {"pago": pago})
+
+
+@login_required
+def editarPago(request):
+    if request.method == "POST":
+        codigo = request.POST["codigo"]
+        fecha_pago_esperada_var = request.POST["fecha_esperada"]
+        monto_pago_var = request.POST["monto_pago"]
+
+        try:
+            pago = Pago.objects.get(id_pago=codigo)
+        except Cliente.DoesNotExist:
+            raise Http404("El cliente no existe")
+
+        # Check if "fecha_real" key is in request.POST
+        if "fecha_real" in request.POST:
+            fecha_pago_real_var = request.POST["fecha_real"]
+            pago.fecha_pago_real = fecha_pago_real_var
+
+        if "metodo_pago" in request.POST:
+            metodo_pago_var = request.POST["metodo_pago"]
+            pago.metodo_pago = metodo_pago_var
+
+        pago.fecha_pago_esperada = fecha_pago_esperada_var
+        pago.monto_pago = monto_pago_var
+        pago.save()
+
+        return redirect("/informacionPago/" + str(pago.id_cliente.id_cliente))
+
 
 
 ##################################################################################

@@ -30,8 +30,15 @@
             <tbody>
                 {% for p in pagos %}
                 <tr class="align-middle text-center">
-                    <td><a href="#" class="eliminar-pago btn btn-danger btn-sm" data-pago-id="{{ p.id_pago }}"
-                            data-eliminar-url="{% url 'eliminarPago' 0 %}"><i class="bi bi-trash"></i></a></td>
+                    <td>
+                        <a href="{% url 'edicionPago' p.id_pago %}" class="btn btn-warning btn-sm mt-2 mb-2">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+
+                        <a href="#" class="eliminar-pago btn btn-danger btn-sm" data-pago-id="{{ p.id_pago }}"
+                            data-eliminar-url="{% url 'eliminarPago' 0 %}"><i class="bi bi-trash"></i></a>
+                    </td>
+
                     <td class="d-none d-md-table-cell">{{ p.id_pago }}</td>
                     <td>{{ p.monto_pago }}</td>
                     <td>{{ p.fecha_pago_esperada|date:"d/m/Y" }}</td>

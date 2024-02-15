@@ -11,6 +11,10 @@ urlpatterns = [
     path("editarCliente/", views.editarCliente),
     path("formPago/<codigo>", views.formPagoCliente, name="formAgregarPago"),
     path("agregarPago/", views.agregarPago, name="agregarPago"),
+
+    path("edicionPago/<codigo>", views.edicionPago, name="edicionPago"),
+    path("editarPago/", views.editarPago),
+
     path("informacionPago/<codigo>", views.informacionPago, name="informacionPago"),
     path("cancelarPago/<codigo>", views.cancelarPago, name="cancelarPago"),
     path("eliminarPago/<codigo>", views.eliminarPago, name="eliminarPago"),
