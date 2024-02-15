@@ -18,6 +18,13 @@ $(document).ready(function () {
   $("#mostrarFormulario").click(function () {
     $("#formularioContainer").css("display", "flex");
   });
+
+  var ipv4_address = $('#ipv4');
+  ipv4_address.inputmask({
+    alias: "ip",
+    greedy: false 
+  });
+
 });
 
 function cerrarFormulario() {

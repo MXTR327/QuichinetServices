@@ -4,53 +4,10 @@
 {% block content %}
 
 <div class="container mt-4">
-    <div id="formularioContainer" style="display: none;">
-        <div id="formulario">
-            <h2 class="mb-4">Agregar Nuevo Cliente</h2>
-            <form action="/registrarCliente/" method="post" class="needs-validation">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" id="nombre" class="form-control capitalize-first-letter" required>
-                    <div class="invalid-feedback">Por favor, introduce un nombre.</div>
-                </div>
-                <div class="form-group">
-                    <label for="apellido">Apellido</label>
-                    <input type="text" name="apellido" class="form-control capitalize-first-letter" required>
-                    <div class="invalid-feedback">Por favor, introduce un apellido.</div>
-                </div>
-                <div class="form-group">
-                    <label for="dni">DNI</label>
-                    <input type="text" name="dni" maxlength="8" class="form-control"
-                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8);"
-                        title="Debe contener solo 8 dígitos numéricos" required>
-                    <div class="invalid-feedback">Por favor, introduce un DNI válido.</div>
-                </div>
-                <div class="form-group">
-                    <label for="direccion">Dirección</label>
-                    <input type="text" name="direccion" class="form-control capitalize-first-letter" required>
-                    <div class="invalid-feedback">Por favor, introduce una dirección.</div>
-                </div>
-                <div class="form-group">
-                    <label for="telefono">Teléfono</label>
-                    <input type="text" name="telefono" maxlength="9" class="form-control"
-                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9);"
-                        title="Debe contener solo 9 dígitos numéricos" required>
-                    <div class="invalid-feedback">Por favor, introduce un teléfono válido.</div>
-                </div>
-                <div class="form-group">
-                    <label for="fecha">Fecha de Instalación de Servicio</label>
-                    <input type="date" name="fecha" id="fecha" class="form-control" required>
-                    <div class="invalid-feedback">Por favor, introduce una fecha válida.</div>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-sm mt-3">Agregar Cliente</button>
-                <button type="button" class="btn btn-secondary btn-sm mt-3" onclick="cerrarFormulario()">Cerrar</button>
-            </form>
-        </div>
-    </div>
+    {% include 'includes/nuevo_cliente_formulario.html' %}
 
     <h2 class="text-white">Listado de clientes</h2>
+
     <form action method="get" class="mb-3 form-inline">
         {% csrf_token %}
         <div class="row g-3 align-items-center">
@@ -70,7 +27,6 @@
         </div>
     </form>
 
-
     <div class="table-responsive">
         <table class="table table-striped table-hover table-bordered table-light">
             <thead class="thead-dark">
@@ -81,6 +37,9 @@
                     <th>Dirección</th>
                     <th>Teléfono</th>
                     <th>Instalación</th>
+                    <th>Equipo</th>
+                    <th>IP</th>
+                    <th>Red</th>
                     <th><i class="bi bi-brush-fill"></i></th>
                     <th>Pagos</th>
                 </tr>
@@ -94,6 +53,9 @@
                     <td class="capitalize-first-letter">{{ c.direccion_cliente }}</td>
                     <td>{{ c.telefono }}</td>
                     <td>{{ c.fecha_conexion|date:"d/m/Y" }}</td>
+                    <td>{{ c.equipo }}</td>
+                    <td>{{ c.ip }}</td>
+                    <td>{{ c.red }}</td>
                     <td>
                         <a href="{% url 'edicionCliente' c.id_cliente %}" class="btn btn-warning btn-sm mt-2 mb-2">
                             <i class="bi bi-pencil-square"></i>

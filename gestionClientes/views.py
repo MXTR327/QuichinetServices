@@ -105,7 +105,7 @@ def agregarPago(request):
 @login_required
 def index(request):
     busqueda = request.GET.get("buscar")
-    clientes = Cliente.objects.all()
+    clientes = Cliente.objects.all().order_by('nombre_cliente')
 
     if busqueda:
         clientes = Cliente.objects.filter(
@@ -128,6 +128,9 @@ def registrarCliente(request):
     direccion = request.POST["direccion"]
     telefonoC = request.POST["telefono"]
     fecha = request.POST["fecha"]
+    equipo_var = request.POST["equipo"]
+    ip_var = request.POST["ipv4"]
+    red_var = request.POST["red"]
 
     cliente = Cliente.objects.create(
         nombre_cliente=nombre,
@@ -136,6 +139,9 @@ def registrarCliente(request):
         direccion_cliente=direccion,
         telefono=telefonoC,
         fecha_conexion=fecha,
+        equipo=equipo_var,
+        ip=ip_var,
+        red=red_var,
     )
     return redirect("/")
 
@@ -159,6 +165,9 @@ def editarCliente(request):
         direccion = request.POST["direccion"]
         telefonoC = request.POST["telefono"]
         fecha = request.POST["fecha"]
+        equipo_var = request.POST["equipo"]
+        ip_var = request.POST["ipv4"]
+        red_var = request.POST["red"]
 
         try:
             cliente = Cliente.objects.get(id_cliente=codigo)
@@ -170,6 +179,9 @@ def editarCliente(request):
         cliente.direccion_cliente = direccion
         cliente.telefono = telefonoC
         cliente.fecha_conexion = fecha
+        cliente.equipo = equipo_var
+        cliente.ip = ip_var
+        cliente.red = red_var
         cliente.save()
 
         return redirect("/")

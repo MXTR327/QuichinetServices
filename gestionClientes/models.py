@@ -11,6 +11,9 @@ class Cliente(models.Model):
     direccion_cliente = models.CharField(max_length=50, null=False)
     telefono = models.CharField(max_length=50, null=False)
     fecha_conexion = models.DateField(null=False)
+    equipo = models.CharField(max_length=50, null=True)  # Nuevo campo EQUIPO
+    ip = models.CharField(max_length=15, null=True)  # Nuevo campo IP
+    red = models.CharField(max_length=50, null=True)  # Nuevo campo RED
 
 
 class Pago(models.Model):
