@@ -29,3 +29,44 @@
   right: 10px;
   cursor: pointer;
 }
+
+.dataTables_length label {
+  color: white;
+}
+.dataTables_length label select {
+  color: white;
+}
+.dataTables_length label select option {
+  background-color: #808080;
+  color: white;
+}
+
+.dataTables_info,
+.dataTables_paginate .paginate_button.current,
+.dataTables_paginate .paginate_button:hover,
+.dataTables_length label select,
+.dataTables_length label select option {
+  color: white !important; /* Cambia el color del texto a blanco */
+}
+
+.dataTables_filter label {
+  color: white !important; /* Cambia el color del texto a blanco */
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  color: white !important; /* Cambia el color del texto a blanco */
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous,
+.dataTables_wrapper .dataTables_paginate .paginate_button.next {
+  color: white !important; /* Cambia el color del texto a blanco */
+}
+
+.dataTables_filter input[type="search"] {
+  background-color: white !important; /* Cambia el color de fondo a blanco */
+  color: black !important; /* Cambia el color del texto a negro */
+}
+
+.table.dataTable tbody th,
+  .table.dataTable tbody td {
+    padding: 0 !important; /* Elimina todo el padding de las celdas */
+  }
